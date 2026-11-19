@@ -188,6 +188,40 @@ ul.cl li strong{color:var(--text)}
 .im-r{color:var(--amber);font-family:'Cutive Mono',monospace;font-size:.75rem}
 .im-s{color:var(--blue);font-family:'Cutive Mono',monospace;font-size:.75rem}
 .im-c{color:var(--dim);font-family:'Cutive Mono',monospace;font-size:.75rem}
+
+/* ══════════════════════════════════════
+   ARQUITECTURA — diagrama del Transformer (redibujado de Vaswani et al. 2017, Fig. 1)
+══════════════════════════════════════ */
+.arch{display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:center}
+.tf{height:min(74vh,600px);width:auto;display:block;overflow:visible}
+.tf text{font-family:'Nunito',sans-serif;font-size:13px;font-weight:600;fill:var(--text);text-anchor:middle;dominant-baseline:central}
+.tf .lbl{font-family:'Cutive Mono',monospace;font-size:11px;font-weight:400;fill:var(--dim);letter-spacing:.08em;text-anchor:start}
+.tf .ann{font-size:12px;font-weight:400;fill:var(--dim)}
+.tf .io{font-family:'Cutive Mono',monospace;font-size:13px;font-weight:400;fill:var(--teal)}
+.tf .lay{fill:var(--surface);stroke:var(--border)}
+.tf .b-att{fill:#4d9fff1f;stroke:var(--blue);stroke-width:1.5}
+.tf .b-ff{fill:var(--amber-a);stroke:var(--amber);stroke-width:1.5}
+.tf .b-nrm{fill:var(--surface2);stroke:var(--muted);stroke-width:1.5}
+.tf .b-nrm+text{font-size:12px;font-weight:400;fill:var(--dim)}
+.tf .b-emb{fill:var(--surface2);stroke:var(--dim);stroke-width:1.5}
+.tf .b-out{fill:var(--surface2);stroke:var(--text);stroke-width:1.5}
+.tf .ar{stroke:var(--dim);stroke-width:1.6;fill:none}
+.tf .res{stroke:var(--muted);stroke-width:1.4;fill:none}
+.tf .kv{stroke:var(--teal);stroke-width:2;fill:none}
+/* decoder-only: el encoder y la cross-attention se apagan al entrar a la slide */
+.tf .b-only{opacity:0}
+#s-dec .tf .enc,#s-dec .tf .xatt,#s-dec .tf .a-only{transition:opacity .9s ease .9s}
+#s-dec .tf .b-only{transition:opacity .7s ease 1.7s}
+#s-dec.active .tf .enc,#s-dec.active .tf .xatt{opacity:.1}
+#s-dec.active .tf .a-only{opacity:0}
+#s-dec.active .tf .b-only{opacity:1}
+.cmp{display:grid;grid-template-columns:1.1fr 1fr 1fr;font-size:.9rem;border:1px solid var(--border);border-radius:6px;overflow:hidden}
+.cmp>div{padding:6px 12px;border-top:1px solid var(--border);color:var(--dim)}
+.cmp>div:nth-child(-n+3){border-top:none;font-family:'Cutive Mono',monospace;font-size:.75rem;letter-spacing:.08em;color:var(--dim);background:var(--surface2)}
+.cmp>div:nth-child(3n+3){color:var(--teal)}
+.why h3{font-size:1.15rem;margin:4px 0 6px}
+.why p{font-size:.93rem;color:var(--dim);line-height:1.6}
+.why p strong{color:var(--text)}
 </style>
 </head>
 <body>
@@ -413,6 +447,145 @@ ul.cl li strong{color:var(--text)}
 
         <button onclick="bpeRestart()" style="padding:11px;background:var(--teal-a);border:1px solid rgba(0,229,195,.35);color:var(--teal);font-family:'Cutive Mono',monospace;font-size:.85rem;cursor:pointer;border-radius:6px;transition:all .2s;letter-spacing:.05em">▶ reiniciar animación</button>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ ARQUITECTURA 1: EL TRANSFORMER (repaso) ══════ -->
+<div class="slide" id="s-tf">
+  <div class="s-label">Arquitectura</div><div class="s-count"></div>
+  <div class="wrap arch">
+    <svg class="tf fu" viewBox="0 0 600 570" role="img" aria-label="Diagrama del Transformer: encoder a la izquierda y decoder a la derecha, cada uno repetido 6 veces. El decoder tiene masked multi-head attention, una multi-head attention que recibe K y V del encoder, y feed forward; arriba, Linear y Softmax.">
+      <defs>
+        <marker id="tf-h" orient="auto" markerWidth="8" markerHeight="8" refX="7" refY="4" markerUnits="userSpaceOnUse"><path d="M0 0 L8 4 L0 8 Z" fill="#8896b3"/></marker>
+        <marker id="tf-hr" orient="auto" markerWidth="8" markerHeight="8" refX="7" refY="4" markerUnits="userSpaceOnUse"><path d="M0 0 L8 4 L0 8 Z" fill="#3d4d6a"/></marker>
+        <marker id="tf-hkv" orient="auto" markerWidth="8" markerHeight="8" refX="7" refY="4" markerUnits="userSpaceOnUse"><path d="M0 0 L8 4 L0 8 Z" fill="#00e5c3"/></marker>
+      </defs>
+      <g transform="translate(0,24)">
+        <!-- ENCODER -->
+        <g class="enc">
+          <rect class="lay" x="18" y="202" width="248" height="222" rx="12"/>
+          <rect class="lay" x="22" y="206" width="248" height="222" rx="12"/>
+          <rect class="lay" x="26" y="210" width="248" height="222" rx="12"/>
+          <text class="lbl" x="36" y="226">ENCODER</text>
+          <text class="lbl" x="242" y="226">×6</text>
+          <polyline class="res" points="150,422 40,422 40,338 49,338" marker-end="url(#tf-hr)"/>
+          <polyline class="res" points="150,314 40,314 40,244 49,244" marker-end="url(#tf-hr)"/>
+          <g class="ar" marker-end="url(#tf-h)">
+            <line x1="150" y1="521" x2="150" y2="503"/><line x1="150" y1="476" x2="150" y2="457"/>
+            <line x1="110" y1="414" x2="110" y2="401"/><line x1="150" y1="414" x2="150" y2="401"/><line x1="190" y1="414" x2="190" y2="401"/>
+            <line x1="150" y1="370" x2="150" y2="351"/><line x1="150" y1="326" x2="150" y2="303"/><line x1="150" y1="272" x2="150" y2="257"/>
+          </g>
+          <path class="ar" d="M150 436 V414 M110 414 H190"/>
+          <rect class="b-nrm" x="50" y="232" width="200" height="24" rx="6"/><text x="150" y="244">Add &amp; Norm</text>
+          <rect class="b-ff" x="50" y="272" width="200" height="30" rx="6"/><text x="150" y="287">Feed Forward</text>
+          <rect class="b-nrm" x="50" y="326" width="200" height="24" rx="6"/><text x="150" y="338">Add &amp; Norm</text>
+          <rect class="b-att" x="50" y="370" width="200" height="30" rx="6"/><text x="150" y="385">Multi-Head Attention</text>
+          <circle cx="150" cy="446" r="10" fill="#080c18" stroke="#8896b3" stroke-width="1.6"/><path d="M144 446 H156 M150 440 V452" stroke="#8896b3" stroke-width="1.6"/>
+          <text class="ann" x="136" y="446" style="text-anchor:end">posición +</text>
+          <rect class="b-emb" x="50" y="476" width="200" height="26" rx="6"/><text x="150" y="489">Embedding</text>
+          <text class="io" x="150" y="535">El gato duerme</text>
+        </g>
+        <!-- DECODER -->
+        <rect class="lay" x="314" y="110" width="268" height="314" rx="12"/>
+        <rect class="lay" x="310" y="114" width="268" height="314" rx="12"/>
+        <rect class="lay" x="306" y="118" width="268" height="314" rx="12"/>
+        <text class="lbl" x="316" y="134">DECODER</text>
+        <text class="lbl a-only" x="542" y="134">×6</text>
+        <text class="lbl b-only" x="542" y="134">×N</text>
+        <polyline class="res" points="430,422 550,422 550,338 531,338" marker-end="url(#tf-hr)"/>
+        <polyline class="res" points="430,224 550,224 550,158 531,158" marker-end="url(#tf-hr)"/>
+        <g class="ar" marker-end="url(#tf-h)">
+          <line x1="430" y1="521" x2="430" y2="503"/><line x1="430" y1="476" x2="430" y2="457"/>
+          <line x1="390" y1="414" x2="390" y2="401"/><line x1="430" y1="414" x2="430" y2="401"/><line x1="470" y1="414" x2="470" y2="401"/>
+          <line x1="430" y1="370" x2="430" y2="351"/>
+          <line x1="430" y1="186" x2="430" y2="171"/><line x1="430" y1="146" x2="430" y2="75"/>
+          <line x1="430" y1="50" x2="430" y2="41"/><line x1="430" y1="16" x2="430" y2="6"/>
+        </g>
+        <path class="ar" d="M430 436 V414 M390 414 H470"/>
+        <!-- cross-attention: lo único que conecta con el encoder -->
+        <g class="xatt">
+          <polyline class="res" points="470,314 550,314 550,244 531,244" marker-end="url(#tf-hr)"/>
+          <g class="ar" marker-end="url(#tf-h)"><line x1="470" y1="326" x2="470" y2="303"/><line x1="430" y1="272" x2="430" y2="257"/><line x1="430" y1="232" x2="430" y2="217"/></g>
+          <polyline class="kv" points="150,232 150,174 290,174 290,316 370,316 370,303" marker-end="url(#tf-hkv)"/>
+          <text x="210" y="162" style="fill:var(--teal)">K, V</text>
+          <text class="ann" x="484" y="316">Q</text>
+          <rect class="b-nrm" x="330" y="232" width="200" height="24" rx="6"/><text x="430" y="244">Add &amp; Norm</text>
+          <rect class="b-att" x="330" y="272" width="200" height="30" rx="6"/><text x="430" y="287">Multi-Head Attention</text>
+        </g>
+        <line class="ar b-only" x1="430" y1="326" x2="430" y2="217" marker-end="url(#tf-h)"/>
+        <rect class="b-out" x="330" y="16" width="200" height="24" rx="6"/><text x="430" y="28">Softmax</text>
+        <rect class="b-out" x="330" y="50" width="200" height="24" rx="6"/><text x="430" y="62">Linear</text>
+        <rect class="b-nrm" x="330" y="146" width="200" height="24" rx="6"/><text x="430" y="158">Add &amp; Norm</text>
+        <rect class="b-ff" x="330" y="186" width="200" height="30" rx="6"/><text x="430" y="201">Feed Forward</text>
+        <rect class="b-nrm" x="330" y="326" width="200" height="24" rx="6"/><text x="430" y="338">Add &amp; Norm</text>
+        <rect class="b-att" x="330" y="370" width="200" height="30" rx="6"/><text x="430" y="385">Masked Multi-Head Att.</text>
+        <circle cx="430" cy="446" r="10" fill="#080c18" stroke="#8896b3" stroke-width="1.6"/><path d="M424 446 H436 M430 440 V452" stroke="#8896b3" stroke-width="1.6"/>
+        <text class="ann" x="444" y="446" style="text-anchor:start">+ posición</text>
+        <rect class="b-emb" x="330" y="476" width="200" height="26" rx="6"/><text x="430" y="489">Embedding</text>
+        <text class="io a-only" x="430" y="535">&lt;s&gt; The cat</text>
+        <text class="io b-only" x="430" y="535">El gato duerme → The cat</text>
+        <text class="ann" x="430" y="-10">Probabilidad del próximo token</text>
+      </g>
+    </svg>
+    <div>
+      <h2 class="h fu fu1">Recordemos: el Transformer</h2>
+      <p class="sub fu fu2">Vaswani et al. (2017) — el diagrama que recorrimos caja por caja</p>
+      <ul class="cl fu fu3" style="margin-bottom:18px">
+        <li><strong>Encoder:</strong> lee toda la entrada a la vez. Cada token mira a <strong>todos</strong> los demás.</li>
+        <li><strong>Decoder:</strong> genera de a un token. La <strong>máscara causal</strong> le tapa el futuro.</li>
+        <li><strong>Cross-attention:</strong> el único puente. Q sale del decoder; K y V, del encoder.</li>
+        <li>Pensado para <strong>traducir</strong>: una oración de entrada → una oración de salida.</li>
+      </ul>
+      <div class="hb hb-a fu fu4">
+        <div class="mono" style="font-size:.7rem;color:var(--amber);margin-bottom:6px;letter-spacing:.08em">PREGUNTA</div>
+        <div style="font-size:1rem;color:var(--dim);line-height:1.6">Un LLM no traduce de A a B: <strong style="color:var(--text)">continúa texto</strong>. ¿Qué partes de este diagrama necesita?</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ ARQUITECTURA 2: DECODER-ONLY ══════ -->
+<div class="slide" id="s-dec">
+  <div class="s-label">Arquitectura</div><div class="s-count"></div>
+  <div class="wrap arch">
+    <div id="tf-dec-holder"></div><!-- se clona el SVG de #s-tf al cargar -->
+    <div>
+      <h2 class="h fu">Decoder-only</h2>
+      <p class="sub fu fu1">Sin oración de entrada aparte, el encoder sobra</p>
+      <ul class="cl fu fu2" style="margin-bottom:18px">
+        <li>Sin encoder no hay nada que consultar → la <strong>cross-attention desaparece</strong></li>
+        <li>Cada capa queda con 2 subcapas: <strong>masked self-attention + feed-forward</strong></li>
+        <li>Prompt y respuesta son <strong>una sola secuencia</strong>: el "input" es el comienzo del texto</li>
+        <li>Lo demás se mantiene: embeddings, Add &amp; Norm, Linear + softmax sobre el vocabulario</li>
+      </ul>
+      <div class="cmp fu fu3">
+        <div></div><div>PAPER BASE (2017)</div><div>LLAMA 3.1 8B (DEMO)</div>
+        <div>Bloques</div><div>6 enc. + 6 dec.</div><div>32 decoder</div>
+        <div>d_model</div><div>512</div><div>4 096</div>
+        <div>Cabezas</div><div>8</div><div>32</div>
+        <div>Vocabulario</div><div>~37 000</div><div>~128 000</div>
+        <div>Parámetros</div><div>65 M</div><div>8 000 M</div>
+      </div>
+      <div class="fu fu4" style="font-size:.85rem;color:var(--dim);margin-top:10px;line-height:1.6">Cambios de detalle: normalización antes de cada subcapa (RMSNorm), posiciones RoPE, SwiGLU en la FFN, GQA.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ ARQUITECTURA 3: ¿POR QUÉ DECODER-ONLY? ══════ -->
+<div class="slide" id="s-why">
+  <div class="s-label">Arquitectura</div><div class="s-count"></div>
+  <div class="wrap">
+    <h2 class="h fu">¿Por qué decoder-only?</h2>
+    <p class="sub fu fu1">La arquitectura más simple que encaja con el objetivo: predecir el próximo token</p>
+    <div class="g2 why" style="gap:16px">
+      <div class="card fu fu2"><div class="step-n">01</div><h3>Cualquier texto sirve para entrenar</h3><p>No hace falta un par (entrada, salida) alineado como en traducción. El target es <strong>el mismo texto corrido un lugar</strong>: internet entero es dataset.</p></div>
+      <div class="card fu fu3"><div class="step-n">02</div><h3>Cada posición es una predicción</h3><p>Con la máscara causal, una ventana de n tokens da <strong>n predicciones en un solo forward</strong>. Es el teacher forcing del paper, aplicado a todo el texto.</p></div>
+      <div class="card fu fu4"><div class="step-n">03</div><h3>Una tarea que las abarca a todas</h3><p>Traducir, resumir, responder, programar: todo es <strong>continuar el texto</strong>. Un chat es una sola secuencia que crece turno a turno.</p></div>
+      <div class="card fu fu5"><div class="step-n">04</div><h3>Más simple de escalar y de servir</h3><p>Un solo stack. Y por la máscara, las K y V de los tokens anteriores no cambian: se guardan (<strong>KV cache</strong>) y cada token nuevo cuesta un paso.</p></div>
+    </div>
+    <div class="hb hb-t fu fu6" style="margin-top:16px;font-size:.95rem;color:var(--dim);line-height:1.6">
+      No es la única opción: <strong style="color:var(--text)">encoder-only</strong> (BERT) sigue siendo la base de embeddings y clasificación, y <strong style="color:var(--text)">encoder-decoder</strong> (T5, Whisper) se usa en tareas entrada → salida. Para generar texto general a escala ganó el <strong style="color:var(--teal)">decoder-only</strong>: GPT, Llama, Gemini, DeepSeek.
     </div>
   </div>
 </div>
@@ -871,9 +1044,11 @@ ul.cl li strong{color:var(--text)}
 </div><!-- /slides -->
 
 <script>
-const TOTAL = 18;
-let cur = 0;
 const slides = document.querySelectorAll('.slide');
+const TOTAL = slides.length;
+let cur = 0;
+// la slide decoder-only reusa el diagrama del Transformer
+document.getElementById('tf-dec-holder').replaceWith(document.querySelector('#s-tf svg.tf').cloneNode(true));
 
 function go(dir) {
   const prev = cur;
@@ -896,12 +1071,8 @@ function updateUI() {
 
 // ─── slide-specific init ───────────────────────────────────────
 function onEnter(idx) {
-  if (idx === 3) initTokens();
-  if (idx === 4) initBPE();
-  if (idx === 5) initTraining();
-  if (idx === 6) initMath();
-  if (idx === 7) initInference();
-  if (idx === 8) initDemoBanner();
+  const init = {s4: initTokens, 's-bpe': initBPE, s5: initTraining, s6: initMath, s7: initInference, 's-demo': initDemoBanner}[slides[idx].id];
+  if (init) init();
 }
 
 // builds a perfectly-aligned ASCII box — just change the text string
