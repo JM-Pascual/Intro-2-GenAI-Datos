@@ -286,6 +286,28 @@ ul.cl li strong{color:var(--text)}
 .rec>div{padding:8px 14px;border-top:1px solid var(--border);color:var(--dim)}
 .rec>div:nth-child(-n+4){border-top:none;font-family:'Cutive Mono',monospace;font-size:.75rem;letter-spacing:.08em;color:var(--dim);background:var(--surface2)}
 .rec>div:nth-child(4n+1){color:var(--text)}
+
+/* ══════════════════════════════════════
+   Reinforcement Learning
+══════════════════════════════════════ */
+.rl-voc{grid-template-columns:1.1fr 1fr 1fr 1fr 1fr}
+.rl-voc>div:nth-child(-n+5){border-top:none;font-family:'Cutive Mono',monospace;font-size:.75rem;letter-spacing:.08em;color:var(--dim);background:var(--surface2)}
+.rl-voc>div:nth-child(n+6){color:var(--text)}
+.rl-voc>div:nth-child(6){color:var(--dim)}
+
+/* ══════════════════════════════════════
+   Cierre: "Muchas gracias!" token a token
+══════════════════════════════════════ */
+#ty-out{font-size:clamp(4rem,9vw,7rem);min-height:1.25em;text-align:center;white-space:pre;background:linear-gradient(130deg,var(--text) 0%,var(--teal) 60%,var(--blue) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+#ty-out .tk{animation:fadeIn .35s ease both}
+#ty-cur{-webkit-text-fill-color:var(--teal);font-weight:400}
+#ty-probs{display:grid;grid-template-columns:auto 260px auto;gap:6px 14px;align-items:center;margin-top:26px;min-height:120px}
+#ty-probs .pt{font-family:'Cutive Mono',monospace;font-size:1rem;color:var(--dim);text-align:right;white-space:pre}
+#ty-probs .pb{height:12px;border-radius:3px;background:var(--surface2);overflow:hidden}
+#ty-probs .pb i{display:block;height:100%;width:0;background:var(--muted);transition:width .5s ease}
+#ty-probs .pv{font-family:'Cutive Mono',monospace;font-size:.9rem;color:var(--dim)}
+#ty-probs .win .pt,#ty-probs .win .pv{color:var(--teal)}
+#ty-probs .win .pb i{background:var(--teal)}
 </style>
 </head>
 <body>
@@ -1075,63 +1097,52 @@ ul.cl li strong{color:var(--text)}
   </div>
 </div>
 
-<!-- ══════ SLIDE 12: REINFORCEMENT LEARNING ══════ -->
-<div class="slide" id="s12">
+<!-- ══════ RL 1: SFT IMITA, RL PRACTICA ══════ -->
+<div class="slide" id="s-rl1">
   <div class="s-label">Reinforcement Learning</div><div class="s-count"></div>
   <div class="wrap">
     <h2 class="h fu">Reinforcement Learning</h2>
-    <p class="sub fu fu1">El modelo descubre su propia forma óptima de razonar — más allá de imitar humanos</p>
-    <div class="g2" style="gap:28px">
-      <div class="fu fu2">
-        <div class="step a"><div class="step-n amber">01</div><div><h4>Generar N respuestas</h4><p>Para el mismo prompt, el modelo genera múltiples respuestas posibles</p></div></div>
-        <div class="step a"><div class="step-n amber">02</div><div><h4>Evaluar y filtrar</h4><p>Respuestas <span style="color:var(--coral)">incorrectas → descartar</span>, <span style="color:var(--teal)">correctas → guardar</span></p></div></div>
-        <div class="step a"><div class="step-n amber">03</div><div><h4>Seleccionar la mejor</h4><p>De las correctas, se elige la mejor por largo en tokens y calidad del razonamiento</p></div></div>
-        <div class="step a"><div class="step-n amber">04</div><div><h4>Entrenar sobre el resultado</h4><p>El modelo se actualiza para favorecer esa secuencia de tokens</p></div></div>
+    <p class="sub fu fu1">SFT le enseña a imitar respuestas. RL le enseña a conseguir buenos resultados.</p>
+    <div class="g2 why fu fu2" style="gap:18px;margin-bottom:16px">
+      <div class="card">
+        <div class="step-n amber">SFT · EJEMPLOS RESUELTOS</div>
+        <h3>Imitar</h3>
+        <p>Datos: respuestas <strong>escritas por humanos</strong>.<br>Señal: copiar cada token del ejemplo.<br>Techo: tan bueno como quien escribió el ejemplo. Y el humano no sabe qué pasos le resultan fáciles o difíciles <strong>al modelo</strong>.</p>
       </div>
-      <div class="fu fu3">
-        <div class="hb hb-c" style="margin-bottom:14px">
-          <div class="mono" style="font-size:.7rem;color:var(--coral);margin-bottom:5px">ANALOGÍA: AlphaGo Move 37</div>
-          <div style="font-size:.97rem;color:var(--dim)">El modelo puede descubrir estrategias de razonamiento que <strong>ningún humano habría sugerido</strong></div>
-        </div>
-        <div class="card">
-          <div class="mono" style="font-size:.7rem;color:var(--amber);margin-bottom:8px">ESTADO EN INDUSTRIA</div>
-          <ul class="cl">
-            <li>Pre-training y SFT son <strong>estándar</strong> en la industria</li>
-            <li><strong>DeepSeek R1</strong> — primera empresa en publicar uso de RL para LLMs</li>
-            <li>Genera modelos que usan <strong>más tokens</strong> → piensan y re-evalúan sus conclusiones</li>
-            <li>"Thinking", "Reasoning", "Advanced reasoning" → <strong>etapa de RL</strong></li>
-          </ul>
-        </div>
+      <div class="card">
+        <div class="step-n" style="color:var(--coral)">RL · EJERCICIOS CON SOLO LA RESPUESTA</div>
+        <h3>Practicar</h3>
+        <p>Datos: problemas y una forma de <strong>puntuar</strong> el resultado.<br>Señal: un número al final de cada intento.<br>Techo: puede superar a los humanos. El modelo <strong>descubre sus propios pasos</strong>, como el Movimiento 37 de AlphaGo.</p>
       </div>
+    </div>
+    <div class="rec rl-voc fu fu3">
+      <div>EN RL SE LLAMA…</div><div>POLÍTICA</div><div>ACCIÓN</div><div>EPISODIO</div><div>RECOMPENSA</div>
+      <div>…y en un LLM es</div><div>el modelo</div><div>elegir el próximo token</div><div>una respuesta completa</div><div>un puntaje al final</div>
     </div>
   </div>
 </div>
 
-<!-- ══════ SLIDE 13: RLHF ══════ -->
-<div class="slide" id="s13">
+<!-- ══════ RL 2: RLHF ══════ -->
+<div class="slide" id="s-rlhf">
   <div class="s-label">Reinforcement Learning</div><div class="s-count"></div>
   <div class="wrap">
-    <h2 class="h fu">RLHF — Reinforcement Learning from Human Feedback</h2>
-    <p class="sub fu fu1">No podemos clasificar todo manualmente — entrenamos una red que simule el juicio humano</p>
-    <div class="g2" style="gap:28px">
+    <h2 class="h fu">RLHF: aprender de preferencias humanas</h2>
+    <p class="sub fu fu1">Para lo que no tiene una respuesta correcta: un chiste, un resumen, un tono amable</p>
+    <div class="g2" style="gap:30px;align-items:start">
       <div class="fu fu2">
-        <ul class="cl" style="margin-bottom:16px">
-          <li>Imposible clasificar <strong>todas las respuestas</strong> manualmente</li>
-          <li>Solución: entrenar un <strong>reward model</strong> que simule el scoring humano</li>
-          <li>A medida que se refina, mejor predice el <strong>label del humano</strong></li>
-          <li>Este reward model se usa como señal para el <strong>loop de RL</strong></li>
-        </ul>
-        <div class="hb hb-a">
-          <div class="mono" style="font-size:.7rem;color:var(--amber);margin-bottom:5px">THINKING MODELS</div>
-          <div style="font-size:.97rem;color:var(--dim)"><strong>Model Distillation Risk:</strong> los providers muestran solo resúmenes del razonamiento para evitar que se destile a otro modelo</div>
-        </div>
+        <div class="step a"><div class="step-n amber">01</div><div><h4>Humanos ordenan</h4><p>Varias respuestas al mismo prompt, de mejor a peor. Elegir es mucho más fácil que escribir la respuesta ideal.</p></div></div>
+        <div class="step a"><div class="step-n amber">02</div><div><h4>Reward model</h4><p>El mismo tipo de red, pero en vez de predecir el próximo token devuelve <strong style="color:var(--text)">un número</strong>. Se entrena para que sus puntajes respeten el orden humano: un "humano simulado" que puntúa sin cansarse.</p></div></div>
+        <div class="step a"><div class="step-n amber">03</div><div><h4>RL contra el reward model</h4><p>El LLM responde, la red puntúa y se refuerzan las respuestas mejor puntuadas, con una penalización si se aleja demasiado del modelo de SFT.</p></div></div>
       </div>
       <div class="fu fu3">
-        <div class="mono" style="font-size:.65rem;color:var(--muted);margin-bottom:10px;letter-spacing:.1em">EL LOOP RLHF</div>
-        <div class="step" style="border-color:var(--amber)"><div class="step-n amber">01</div><div><h4>Humanos rankean respuestas</h4><p>Pares de respuestas son rankeadas por calidad</p></div></div>
-        <div class="step" style="border-color:var(--amber)"><div class="step-n amber">02</div><div><h4>Reward model aprende</h4><p>Una red neuronal aprende a predecir el ranking humano</p></div></div>
-        <div class="step" style="border-color:var(--amber)"><div class="step-n amber">03</div><div><h4>Comparar rankings</h4><p>Se mide la diferencia entre el ranking humano y el artificial</p></div></div>
-        <div class="step" style="border-color:var(--teal)"><div class="step-n">04</div><div><h4>Usar como señal de reward</h4><p>El reward model guía el entrenamiento de RL a escala</p></div></div>
+        <div class="hb hb-t" style="margin-bottom:14px">
+          <div class="mono" style="font-size:.75rem;color:var(--teal);margin-bottom:6px;letter-spacing:.08em">POR QUÉ FUNCIONA</div>
+          <div style="font-size:.97rem;color:var(--dim);line-height:1.6">Un humano no sabe escribir el chiste perfecto, pero <strong style="color:var(--text)">reconoce el mejor de cinco</strong>. Discriminar es más fácil que generar.</div>
+        </div>
+        <div class="hb hb-c">
+          <div class="mono" style="font-size:.75rem;color:var(--coral);margin-bottom:6px;letter-spacing:.08em">EL LÍMITE: REWARD HACKING</div>
+          <div style="font-size:.97rem;color:var(--dim);line-height:1.6">El reward model es una red, y se puede engañar. Si se entrena de más, el LLM encuentra respuestas absurdas, como <span class="mono" style="color:var(--text)">"the the the the"</span>, que igual sacan puntaje altísimo. Por eso RLHF se corta tras unos cientos de pasos: es un <strong style="color:var(--text)">ajuste fino</strong>, no RL ilimitado.</div>
+        </div>
       </div>
     </div>
   </div>
@@ -1154,7 +1165,7 @@ ul.cl li strong{color:var(--text)}
       </div>
       <div class="card" style="border-top:3px solid var(--coral);text-align:left">
         <div class="mono" style="font-size:.6rem;color:var(--coral);letter-spacing:.1em;margin-bottom:7px">03 / RL</div>
-        <div style="font-size:.97rem;color:var(--dim);line-height:1.65">Explorar → Evaluar → Reforzar → <strong style="color:var(--text)">Thinking Model</strong></div>
+        <div style="font-size:.97rem;color:var(--dim);line-height:1.65">Probar → Puntuar → Reforzar → <strong style="color:var(--text)">Thinking Model</strong></div>
       </div>
     </div>
     <div class="hb hb-t fu fu3" style="text-align:left">
@@ -1163,10 +1174,13 @@ ul.cl li strong{color:var(--text)}
   </div>
 </div>
 
-<!-- ══════ SLIDE: THANK YOU ══════ -->
+<!-- ══════ SLIDE: MUCHAS GRACIAS (generado token a token) ══════ -->
 <div class="slide" id="s-ty" style="background:radial-gradient(ellipse at 50% 50%,rgba(0,229,195,.08) 0%,transparent 65%),var(--bg)">
-  <div class="col center" style="gap:0;z-index:2">
-    <h1 class="fu" style="font-size:clamp(5rem,12vw,9rem);background:linear-gradient(130deg,var(--text) 0%,var(--teal) 60%,var(--blue) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-align:center">Thank you</h1>
+  <div class="col center" style="gap:0;z-index:2;width:100%;max-width:900px">
+    <div class="mono" style="font-size:.85rem;color:var(--dim);margin-bottom:8px">&lt;|im_start|&gt;assistant</div>
+    <h1 id="ty-out" aria-label="Muchas gracias!"><span id="ty-cur" class="cursor">▌</span></h1>
+    <div id="ty-probs" aria-hidden="true"></div>
+    <div id="ty-step" class="mono" style="font-size:.85rem;color:var(--dim);margin-top:14px;min-height:1.2em"></div>
   </div>
 </div>
 
@@ -1208,7 +1222,7 @@ function updateUI() {
 // ─── slide-specific init ───────────────────────────────────────
 function onEnter(idx) {
   if (slides[idx].dataset.steps) slides[idx].dataset.step = 0;
-  const init = {s4: initTokens, 's-bpe': initBPE, s5: initTraining, s6: initMath, s7: initInference, 's-samp': initSampling, 's-demo': initDemoBanner}[slides[idx].id];
+  const init = {s4: initTokens, 's-bpe': initBPE, s5: initTraining, s6: initMath, s7: initInference, 's-samp': initSampling, 's-demo': initDemoBanner, 's-ty': initThanks}[slides[idx].id];
   if (init) init();
 }
 function onStep(idx) {
@@ -1459,6 +1473,43 @@ function initInference() {
   });
 }
 
+
+// ─── CIERRE: "Muchas gracias!" generado token a token ─────────
+// probabilidades ilustrativas; el primero de cada paso es el que gana
+const TY_STEPS = [
+  [['Muchas', .62], ['Gracias', .21], ['¡', .09], ['Thank', .05]],
+  [[' gracias', .91], [' gracia', .03], [' por', .02], [',', .02]],
+  [['!', .74], ['.', .15], [' a', .06], [' 🙂', .03]],
+  [['<|im_end|>', .88], ['\\n', .06], [' ¿', .03], [' Saludos', .02]],
+];
+let tyRun = 0;
+function initThanks() {
+  const run = ++tyRun, out = document.getElementById('ty-out'), cur = document.getElementById('ty-cur');
+  const probs = document.getElementById('ty-probs'), step = document.getElementById('ty-step');
+  out.querySelectorAll('.tk').forEach(t => t.remove());
+  cur.style.display = '';
+  probs.innerHTML = ''; step.textContent = '';
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+  (async () => {
+    await wait(700);
+    for (let i = 0; i < TY_STEPS.length; i++) {
+      if (run !== tyRun) return;  // se volvió a entrar a la slide: corta esta corrida
+      const cands = TY_STEPS[i];
+      step.textContent = `paso ${i + 1} · softmax sobre el vocabulario`;
+      probs.innerHTML = cands.map(([t, p]) => `<div class="pt">${t}</div><div class="pb"><i data-w="${p * 100}"></i></div><div class="pv">${Math.round(p * 100)}%</div>`).join('');
+      await wait(60);
+      probs.querySelectorAll('i').forEach(b => b.style.width = b.dataset.w + '%');
+      await wait(900);
+      if (run !== tyRun) return;
+      [...probs.children].slice(0, 3).forEach(c => c.classList.add('win'));
+      await wait(500);
+      if (run !== tyRun) return;
+      if (i === TY_STEPS.length - 1) { cur.style.display = 'none'; step.textContent = 'fin de secuencia'; return; }
+      cur.insertAdjacentHTML('beforebegin', `<span class="tk">${cands[0][0]}</span>`);
+      await wait(500);
+    }
+  })();
+}
 // ─── keyboard nav ──────────────────────────────────────────────
 document.addEventListener('keydown', e => {
   if (e.target.matches('input, button')) return;  // las flechas mueven los sliders, no las slides
