@@ -222,6 +222,70 @@ ul.cl li strong{color:var(--text)}
 .why h3{font-size:1.15rem;margin:4px 0 6px}
 .why p{font-size:.93rem;color:var(--dim);line-height:1.6}
 .why p strong{color:var(--text)}
+
+/* ══════════════════════════════════════
+   BPE por pasos
+══════════════════════════════════════ */
+.bpe{display:grid;grid-template-columns:1.1fr 1fr;gap:20px;align-items:stretch}
+.bpe-side{display:flex;flex-direction:column;gap:16px}
+.bpe-k{font-family:'Cutive Mono',monospace;font-size:.75rem;letter-spacing:.08em;color:var(--dim);margin-bottom:12px}
+.bpe-row{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-top:1px solid var(--border)}
+.bpe-row:first-child{border-top:none}
+.bpe-chips{display:flex;flex-wrap:wrap;gap:6px}
+.bpe-f{font-family:'Cutive Mono',monospace;color:var(--dim);font-size:1rem}
+.bpe-big{display:flex;align-items:center;gap:10px;margin-bottom:12px;font-size:1.2rem;color:var(--dim)}
+.bpe-p{font-size:.97rem;color:var(--dim);line-height:1.7;margin-top:6px}
+.bpe-p strong{color:var(--text)}
+.bpe-dim{color:var(--muted)}
+.bpe-foot{display:flex;justify-content:space-between;margin:14px 0;font-family:'Cutive Mono',monospace;font-size:.85rem;color:var(--dim)}
+.chip{display:inline-block;font-family:'Cutive Mono',monospace;font-size:1.1rem;padding:4px 10px;border:1px solid var(--border);border-radius:5px;background:var(--surface2);color:var(--text);transition:all .3s}
+.chip.hl{border-color:var(--amber);background:var(--amber-a);color:var(--amber)}
+.chip.new{border-color:var(--teal);background:var(--teal-a);color:var(--teal)}
+
+/* ══════════════════════════════════════
+   Volumen de datasets (área ∝ tokens)
+══════════════════════════════════════ */
+.ds{width:100%;height:auto;max-height:52vh;display:block;overflow:visible}
+.ds circle{transform:scale(0);transform-box:fill-box;transform-origin:50% 100%;transition:transform 1.1s cubic-bezier(.3,1.25,.5,1)}
+.ds .lab{opacity:0;transition:opacity .6s}
+#s-data.active .ds circle{transform:scale(1)}
+#s-data.active .ds .lab{opacity:1}
+.ds text{font-family:'Nunito',sans-serif;fill:var(--dim);font-size:15px;text-anchor:middle}
+.ds .nm{font-family:'Special Elite',cursive;font-size:22px;fill:var(--text)}
+.ds .tk{font-family:'Cutive Mono',monospace;font-size:17px}
+
+/* ══════════════════════════════════════
+   Capa final y sampling
+══════════════════════════════════════ */
+.flow{display:flex;flex-direction:column;gap:6px}
+.flow .fb{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:11px 16px;border:1px solid var(--border);border-radius:6px;background:var(--surface)}
+.flow .fb b{font-family:'Special Elite',cursive;font-weight:400;font-size:1.05rem;color:var(--text)}
+.flow .fb span{font-family:'Cutive Mono',monospace;font-size:.85rem;color:var(--dim)}
+.flow .fa{text-align:center;color:var(--muted);font-size:.9rem;line-height:1}
+.flow .fb.pick{border-color:var(--amber);background:var(--amber-a)}
+.samp{display:grid;grid-template-columns:1.25fr 1fr;gap:26px;align-items:start}
+#samp-bars{display:flex;gap:8px;align-items:flex-end;height:240px;padding:0 4px;border-bottom:1px solid var(--border)}
+.sb-col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px;height:100%}
+.sb-val{font-family:'Cutive Mono',monospace;font-size:.85rem;color:var(--teal)}
+.sb-bar{width:100%;border-radius:3px 3px 0 0;background:var(--teal-a);border:1px solid var(--teal);transition:height .35s ease}
+.sb-col.out .sb-val{color:var(--coral)}
+.sb-col.out .sb-bar{background:transparent;border:1px dashed var(--muted)}
+.sb-lbl{font-family:'Cutive Mono',monospace;font-size:.85rem;color:var(--text);padding-top:6px}
+.sb-col.out .sb-lbl{color:var(--muted);text-decoration:line-through}
+.ctl{display:flex;flex-direction:column;gap:4px;margin-bottom:14px}
+.ctl-h{display:flex;justify-content:space-between;align-items:baseline}
+.ctl-h b{font-family:'Special Elite',cursive;font-weight:400;font-size:1.1rem}
+.ctl-h output{font-family:'Cutive Mono',monospace;font-size:1.1rem;color:var(--amber)}
+.ctl p{font-size:.88rem;color:var(--dim);line-height:1.5}
+.ctl input[type=range]{width:100%;accent-color:var(--amber);cursor:pointer}
+.sbtn{padding:9px 14px;background:var(--teal-a);border:1px solid rgba(0,229,195,.35);color:var(--teal);font-family:'Cutive Mono',monospace;font-size:.9rem;cursor:pointer;border-radius:6px}
+.sbtn:hover{border-color:var(--teal)}
+#samp-out{display:flex;flex-wrap:wrap;gap:5px;min-height:34px;margin-top:10px}
+#samp-out .chip{font-size:.9rem;padding:2px 8px}
+.rec{display:grid;grid-template-columns:1.3fr .8fr .8fr .8fr;font-size:.95rem;border:1px solid var(--border);border-radius:6px;overflow:hidden}
+.rec>div{padding:8px 14px;border-top:1px solid var(--border);color:var(--dim)}
+.rec>div:nth-child(-n+4){border-top:none;font-family:'Cutive Mono',monospace;font-size:.75rem;letter-spacing:.08em;color:var(--dim);background:var(--surface2)}
+.rec>div:nth-child(4n+1){color:var(--text)}
 </style>
 </head>
 <body>
@@ -316,6 +380,31 @@ ul.cl li strong{color:var(--text)}
   </div>
 </div>
 
+<!-- ══════ SLIDE: VOLUMEN DE DATASETS GPT ══════ -->
+<div class="slide" id="s-data">
+  <div class="s-label">Pre-training</div><div class="s-count"></div>
+  <div class="wrap">
+    <h2 class="h fu">¿Cuántos datos?</h2>
+    <p class="sub fu fu1">Tokens de entrenamiento de cada generación de GPT · el área de cada círculo es proporcional</p>
+    <svg class="ds" viewBox="0 0 1000 440" role="img" aria-label="Círculos con área proporcional a los tokens de entrenamiento: GPT-1 unos mil millones, GPT-2 unos diez mil millones, GPT-3 trescientos mil millones, GPT-4 unos trece billones según estimaciones externas.">
+      <!-- radio = 170·√(tokens / 13T): el área es proporcional a los tokens -->
+      <circle cx="80"  cy="343.5" r="1.5"  fill="#4d9fff33" stroke="#4d9fff" stroke-width="1.5" style="transition-delay:.3s"/>
+      <circle cx="255" cy="340.3" r="4.7"  fill="#a78bfa33" stroke="#a78bfa" stroke-width="1.5" style="transition-delay:.8s"/>
+      <circle cx="440" cy="319.2" r="25.8" fill="#ffb73026" stroke="#ffb730" stroke-width="1.5" style="transition-delay:1.3s"/>
+      <circle cx="760" cy="175"   r="170"  fill="#00e5c31a" stroke="#00e5c3" stroke-width="1.5" style="transition-delay:1.8s"/>
+      <line x1="20" y1="345" x2="980" y2="345" stroke="#18213a"/>
+      <g class="lab" style="transition-delay:.5s"><text class="nm" x="80" y="378">GPT-1</text><text class="tk" x="80" y="404" style="fill:#4d9fff">~1B</text><text x="80" y="428">2018 · ~7 000 libros</text></g>
+      <g class="lab" style="transition-delay:1s"><text class="nm" x="255" y="378">GPT-2</text><text class="tk" x="255" y="404" style="fill:#a78bfa">~10B</text><text x="255" y="428">2019 · WebText, 40 GB</text></g>
+      <g class="lab" style="transition-delay:1.5s"><text class="nm" x="440" y="378">GPT-3</text><text class="tk" x="440" y="404" style="fill:#ffb730">300B</text><text x="440" y="428">2020 · Common Crawl +</text></g>
+      <g class="lab" style="transition-delay:2.1s"><text class="nm" x="760" y="378">GPT-4</text><text class="tk" x="760" y="404" style="fill:#00e5c3">~13T</text><text x="760" y="428">2023 · estimación externa</text></g>
+    </svg>
+    <div class="g2 fu fu3" style="gap:14px;margin-top:18px">
+      <div class="hb hb-t" style="font-size:.97rem;color:var(--dim);line-height:1.6">En 5 años, de unos 7 000 libros a una porción enorme de internet: <strong style="color:var(--text)">~10 000× más datos</strong>. FineWeb, el dataset abierto de la slide anterior, tiene 15T tokens.</div>
+      <div style="font-size:.85rem;color:var(--dim);line-height:1.6;padding:4px 2px">B = mil millones · T = billón. GPT-1 y GPT-2: estimados a partir del tamaño del corpus. GPT-1: BooksCorpus. GPT-3: tokens vistos en el entrenamiento, de Common Crawl filtrado, libros y Wikipedia (Brown et al., 2020). GPT-4: OpenAI no publicó la cifra.</div>
+    </div>
+  </div>
+</div>
+
 <!-- ══════ SLIDE 4: TOKENIZATION ══════ -->
 <div class="slide" id="s4">
   <div class="s-label">Pre-training</div><div class="s-count"></div>
@@ -366,87 +455,25 @@ ul.cl li strong{color:var(--text)}
   </div>
 </div>
 
-<!-- ══════ SLIDE BPE: BYTE PAIR ENCODING ══════ -->
-<div class="slide" id="s-bpe">
+<!-- ══════ SLIDE BPE: BYTE PAIR ENCODING (mismo ejemplo que Hands-On Transformers) ══════ -->
+<div class="slide" id="s-bpe" data-steps="4">
   <div class="s-label">Pre-training</div><div class="s-count"></div>
   <div class="wrap">
     <h2 class="h fu">Byte Pair Encoding</h2>
-    <p class="sub fu fu1">El algoritmo que expande 256 bytes hasta un vocabulario de 100k+ tokens expresivos</p>
-
-    <div class="g2" style="gap:28px;align-items:start">
-
-      <!-- Left: theory + merge history -->
-      <div class="fu fu2" style="display:flex;flex-direction:column;gap:14px">
-        <ul class="cl">
-          <li>Empezamos con <strong>256 símbolos</strong> (todos los bytes posibles)</li>
-          <li>Encontramos el <strong>par de tokens más frecuente</strong> en el corpus</li>
-          <li>Lo fusionamos en un <strong>nuevo token</strong> con ID propio</li>
-          <li>Repetimos N veces — GPT-4 realiza ~<strong>50,000 merges</strong></li>
-          <li>Nos detenemos cuando el vocabulario alcanza el <strong>tamaño objetivo</strong></li>
-        </ul>
-
-        <div class="g2" style="gap:10px">
-          <div class="hb hb-t" style="text-align:center;padding:16px">
-            <div class="mono" style="font-size:.72rem;color:var(--teal)">VOCAB BASE</div>
-            <div style="font-family:'Special Elite',cursive;font-size:2.4rem;color:var(--teal);line-height:1.1">256</div>
-            <div style="font-size:.93rem;color:var(--dim)">bytes posibles</div>
-          </div>
-          <div class="hb hb-c" style="text-align:center;padding:16px">
-            <div class="mono" style="font-size:.72rem;color:var(--coral)">GPT-4</div>
-            <div style="font-family:'Special Elite',cursive;font-size:2.4rem;color:var(--coral);line-height:1.1">100k+</div>
-            <div style="font-size:.93rem;color:var(--dim)">tokens</div>
-          </div>
-        </div>
-
-        <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:16px">
-          <div class="mono" style="font-size:.7rem;color:var(--muted);letter-spacing:.1em;margin-bottom:10px">HISTORIAL DE MERGES</div>
-          <div id="bpe-hist" style="min-height:72px;display:flex;flex-direction:column;gap:4px"></div>
-        </div>
-
-        <div class="hb hb-a">
-          <div class="mono" style="font-size:.78rem;color:var(--amber);margin-bottom:5px">TRADE-OFF</div>
-          <div style="font-size:.97rem;color:var(--dim)">Vocab más grande → secuencias más cortas → entrenamiento más eficiente</div>
-        </div>
+    <p class="sub fu fu1">Cómo se arma el vocabulario: fusionar, una y otra vez, el par de símbolos más frecuente</p>
+    <div class="bpe fu fu2">
+      <div class="card">
+        <div class="bpe-k">CORPUS DE ENTRENAMIENTO · PALABRA ×FRECUENCIA</div>
+        <div id="bpe-words"></div>
       </div>
-
-      <!-- Right: animation -->
-      <div class="fu fu3" style="display:flex;flex-direction:column;gap:12px">
-        <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:20px 22px">
-
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
-            <div class="mono" style="font-size:.68rem;color:var(--muted);letter-spacing:.06em">CORPUS: "newer" / "newborn" / "newest"</div>
-            <div id="bpe-slabel" class="mono" style="font-size:.72rem;color:var(--teal)">paso 0 / 3</div>
-          </div>
-
-          <div id="bpe-seq" style="display:flex;flex-wrap:wrap;gap:7px;min-height:70px;align-items:center;padding:14px 16px;background:var(--surface2);border:1px solid var(--border);border-radius:6px"></div>
-
-          <div id="bpe-info" style="margin-top:12px;padding:10px 14px;border:1px dashed var(--border);border-radius:6px;min-height:44px;display:flex;align-items:center;gap:10px;flex-wrap:wrap"></div>
-
-          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:12px">
-            <div style="text-align:center;padding:10px;background:var(--surface2);border-radius:5px">
-              <div class="mono" style="font-size:.62rem;color:var(--muted);margin-bottom:4px">VOCAB</div>
-              <div id="bpe-vocab" style="font-family:'Special Elite',cursive;font-size:1.7rem;color:var(--teal);line-height:1">256</div>
-            </div>
-            <div style="text-align:center;padding:10px;background:var(--surface2);border-radius:5px">
-              <div class="mono" style="font-size:.62rem;color:var(--muted);margin-bottom:4px">MERGES</div>
-              <div id="bpe-merges" style="font-family:'Special Elite',cursive;font-size:1.7rem;color:var(--amber);line-height:1">0</div>
-            </div>
-            <div style="text-align:center;padding:10px;background:var(--surface2);border-radius:5px">
-              <div class="mono" style="font-size:.62rem;color:var(--muted);margin-bottom:4px">EN CORPUS</div>
-              <div id="bpe-tcount" style="font-family:'Special Elite',cursive;font-size:1.7rem;color:var(--coral);line-height:1">18</div>
-            </div>
-          </div>
-
-          <!-- stopping condition indicator -->
-          <div style="margin-top:10px;display:flex;align-items:center;gap:10px;padding:9px 14px;background:rgba(255,183,48,.07);border:1px dashed rgba(255,183,48,.4);border-radius:6px">
-            <span style="font-size:1rem">🛑</span>
-            <span class="mono" style="font-size:.72rem;color:var(--amber);letter-spacing:.04em">CRITERIO DE PARADA</span>
-            <span style="font-size:.85rem;color:var(--dim);margin-left:4px">nos detenemos cuando <strong style="color:var(--text)">vocab = tamaño objetivo</strong> (ej: 50,000 en GPT-4)</span>
-          </div>
-        </div>
-
-        <button onclick="bpeRestart()" style="padding:11px;background:var(--teal-a);border:1px solid rgba(0,229,195,.35);color:var(--teal);font-family:'Cutive Mono',monospace;font-size:.85rem;cursor:pointer;border-radius:6px;transition:all .2s;letter-spacing:.05em">▶ reiniciar animación</button>
+      <div class="bpe-side">
+        <div class="card"><div class="bpe-k" id="bpe-nk">PRÓXIMA FUSIÓN</div><div id="bpe-next"></div></div>
+        <div class="card"><div class="bpe-k" id="bpe-vk">VOCABULARIO</div><div id="bpe-vocab" class="bpe-chips"></div></div>
       </div>
+    </div>
+    <div class="bpe-foot fu fu3"><span id="bpe-step"></span><span id="bpe-hint">→ siguiente fusión</span></div>
+    <div class="hb hb-t fu fu4" style="font-size:.97rem;color:var(--dim);line-height:1.6">
+      <strong style="color:var(--text)">En un LLM real</strong> se arranca con los <strong style="color:var(--text)">256 bytes</strong> en vez de caracteres, y se hacen unas <strong style="color:var(--text)">100 000 fusiones</strong>: así llega GPT-4 a 100 277 tokens. Vocabulario más grande → secuencias más cortas.
     </div>
   </div>
 </div>
@@ -683,6 +710,108 @@ ul.cl li strong{color:var(--text)}
           <div id="inf-loop"></div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ INFERENCIA 1: LA CAPA FINAL ══════ -->
+<div class="slide" id="s-head">
+  <div class="s-label">Inferencia</div><div class="s-count"></div>
+  <div class="wrap">
+    <h2 class="h fu">La capa final</h2>
+    <p class="sub fu fu1">Del último vector a la próxima palabra: el Linear + Softmax de arriba del diagrama</p>
+    <div class="g2" style="gap:32px;align-items:center">
+      <div class="flow fu fu2">
+        <div class="fb"><b>Último vector del decoder</b><span>1 × 4 096</span></div>
+        <div class="fa">↓ × W de 4 096 × 128 256</div>
+        <div class="fb"><b>Logits</b><span>128 256 puntajes, uno por token</span></div>
+        <div class="fa">↓</div>
+        <div class="fb"><b>Softmax</b><span>positivos, suman 1</span></div>
+        <div class="fa">↓</div>
+        <div class="fb"><b>P(token | contexto)</b><span>mat 58% · floor 10% · …</span></div>
+        <div class="fa">↓</div>
+        <div class="fb pick"><b>Elegir un token</b><span style="color:var(--amber)">temperatura · top-k · top-p</span></div>
+      </div>
+      <div class="fu fu3">
+        <ul class="cl" style="margin-bottom:16px">
+          <li>Se usa solo la <strong>última posición</strong>: por la máscara causal, es la que predice lo que sigue</li>
+          <li>Un logit es un <strong>puntaje sin normalizar</strong>: cualquier número real</li>
+          <li>La softmax <strong>exponencia y normaliza</strong>: los convierte en probabilidades</li>
+        </ul>
+        <div class="card" style="text-align:center;padding:14px 20px;margin-bottom:14px">
+          <div style="font-size:1.25rem">$$p_i = \frac{e^{z_i / T}}{\sum_j e^{z_j / T}}$$</div>
+          <div style="font-size:.9rem;color:var(--dim)">Con temperatura T. Con T = 1 es la softmax de siempre.</div>
+        </div>
+        <div class="hb hb-a" style="font-size:.97rem;color:var(--dim);line-height:1.6">La red termina en la <strong style="color:var(--text)">distribución</strong>. Elegir el token es un algoritmo aparte: <strong style="color:var(--text)">no cambia los pesos</strong>, cambia cómo sorteamos.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ INFERENCIA 2: SAMPLING INTERACTIVO ══════ -->
+<div class="slide" id="s-samp">
+  <div class="s-label">Inferencia</div><div class="s-count"></div>
+  <div class="wrap">
+    <h2 class="h fu">Temperatura, Top-K y Top-P</h2>
+    <p class="sub fu fu1">"The cat sat on the ___": 10 candidatos de 128 256. Mové los parámetros y sorteá.</p>
+    <div class="samp fu fu2">
+      <div class="card">
+        <div id="samp-bars"></div>
+        <div style="display:flex;align-items:center;gap:10px;margin-top:14px">
+          <button class="sbtn" onclick="sampDraw(1)">Sortear ×1</button>
+          <button class="sbtn" onclick="sampDraw(10)">Sortear ×10</button>
+          <span style="margin-left:auto;font-size:.9rem;color:var(--dim)">Candidatos en juego: <strong id="samp-n" style="color:var(--text)"></strong></span>
+        </div>
+        <div id="samp-out"></div>
+      </div>
+      <div>
+        <div class="ctl">
+          <div class="ctl-h"><b>Temperatura</b><output id="samp-T"></output></div>
+          <input type="range" id="samp-in-T" min="0.1" max="2" step="0.1" value="1" aria-label="Temperatura">
+          <p>Divide los logits por T antes de la softmax. <strong>T &lt; 1</strong> concentra en el favorito; <strong>T &gt; 1</strong> aplana.</p>
+        </div>
+        <div class="ctl">
+          <div class="ctl-h"><b>Top-K</b><output id="samp-k"></output></div>
+          <input type="range" id="samp-in-k" min="1" max="10" step="1" value="10" aria-label="Top-K">
+          <p>Se queda con los <strong>K más probables</strong> y descarta el resto.</p>
+        </div>
+        <div class="ctl">
+          <div class="ctl-h"><b>Top-P</b><output id="samp-p"></output></div>
+          <input type="range" id="samp-in-p" min="0.05" max="1" step="0.05" value="1" aria-label="Top-P">
+          <p>Se queda con los más probables <strong>hasta sumar P</strong>. Si el modelo está seguro, quedan pocos.</p>
+        </div>
+        <div class="mono" style="font-size:.8rem;color:var(--dim);line-height:1.6">Orden: temperatura → top-k → top-p → renormalizar → sortear</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ INFERENCIA 3: ¿PARA QUÉ SIRVE CADA UNO? ══════ -->
+<div class="slide" id="s-params">
+  <div class="s-label">Inferencia</div><div class="s-count"></div>
+  <div class="wrap">
+    <h2 class="h fu">¿Para qué sirve cada uno?</h2>
+    <p class="sub fu fu1">Los tres recortan o deforman la misma distribución: ninguno le agrega conocimiento al modelo</p>
+    <div class="g3 why fu fu2" style="margin-bottom:16px">
+      <div class="card"><div class="step-n">TEMPERATURA</div><h3>Cuánto arriesgar</h3><p>Baja: respuestas <strong>consistentes y repetibles</strong>. Alta: más variedad, pero también más errores. Con T → 0 es <strong>greedy</strong>: siempre el más probable.</p></div>
+      <div class="card"><div class="step-n">TOP-K</div><h3>Un tope fijo</h3><p>Corta la <strong>cola larga</strong> de tokens absurdos que igual tienen probabilidad. Su límite: K no se adapta; a veces sobran candidatos y a veces faltan.</p></div>
+      <div class="card"><div class="step-n">TOP-P</div><h3>Un tope adaptativo</h3><p>Si la distribución es picuda, quedan 2 o 3 tokens; si es plana, muchos. Es el más usado <strong>junto con la temperatura</strong>.</p></div>
+    </div>
+    <div class="g2 fu fu3" style="gap:20px;align-items:start">
+      <div>
+        <div class="rec">
+          <div>USO</div><div>TEMP.</div><div>TOP-P</div><div>TOP-K</div>
+          <div>Extraer datos, clasificar, código</div><div>0 – 0,2</div><div>1</div><div>—</div>
+          <div>Chat, asistente</div><div>0,7</div><div>0,9</div><div>40</div>
+          <div>Ideas, escritura creativa</div><div>1 – 1,2</div><div>0,95</div><div>—</div>
+        </div>
+        <div style="font-size:.85rem;color:var(--dim);margin-top:6px">Puntos de partida, no reglas. "—" = sin recorte.</div>
+      </div>
+      <ul class="cl">
+        <li>Tocá <strong>uno a la vez</strong>: temperatura o top-p, no los dos juntos</li>
+        <li>T = 0 no garantiza salidas idénticas en una API: el cómputo en GPU no es exactamente determinista</li>
+        <li>En Ollama: <span class="mono" style="color:var(--teal)">options={"temperature": 0.8, "top_k": 40, "top_p": 0.9}</span>, que son sus valores por defecto</li>
+      </ul>
     </div>
   </div>
 </div>
@@ -1050,7 +1179,14 @@ let cur = 0;
 // la slide decoder-only reusa el diagrama del Transformer
 document.getElementById('tf-dec-holder').replaceWith(document.querySelector('#s-tf svg.tf').cloneNode(true));
 
+// slides con data-steps="n": los clics avanzan pasos dentro de la slide antes de cambiar de slide
 function go(dir) {
+  const s = slides[cur], n = +s.dataset.steps || 0, k = +s.dataset.step || 0;
+  if ((dir === 1 && k < n) || (dir === -1 && k > 0)) {
+    s.dataset.step = k + dir;
+    onStep(cur);
+    return;
+  }
   const prev = cur;
   cur = Math.max(0, Math.min(TOTAL - 1, cur + dir));
   if (prev === cur) return;
@@ -1071,8 +1207,102 @@ function updateUI() {
 
 // ─── slide-specific init ───────────────────────────────────────
 function onEnter(idx) {
-  const init = {s4: initTokens, 's-bpe': initBPE, s5: initTraining, s6: initMath, s7: initInference, 's-demo': initDemoBanner}[slides[idx].id];
+  if (slides[idx].dataset.steps) slides[idx].dataset.step = 0;
+  const init = {s4: initTokens, 's-bpe': initBPE, s5: initTraining, s6: initMath, s7: initInference, 's-samp': initSampling, 's-demo': initDemoBanner}[slides[idx].id];
   if (init) init();
+}
+function onStep(idx) {
+  if (slides[idx].id === 's-bpe') bpeRender(+slides[idx].dataset.step);
+}
+
+// ─── BPE: mismo corpus de juguete que Hands-On Transformers ──────
+const BPE_W = [['gato', 5], ['gatos', 2], ['pato', 4], ['gata', 3]];
+const BPE_BASE = ['a', 'g', 'o', 'p', 's', 't'];
+// [a, b, veces, pares que siguen] — conteos ponderados por frecuencia
+const BPE_M = [
+  ['a', 't', 14, 't+o (11) · g+a (10) · p+a (4)'],
+  ['at', 'o', 11, 'g+at (10) · p+at (4) · at+a (3)'],
+  ['g', 'ato', 7, 'p+ato (4) · at+a (3) · g+at (3)'],
+  ['p', 'ato', 4, 'at+a (3) · g+at (3) · gato+s (2)'],
+];
+function bpeMerge(t, a, b) {
+  const o = [];
+  for (let i = 0; i < t.length; i++) {
+    if (t[i] === a && t[i + 1] === b) { o.push(a + b); i++; } else o.push(t[i]);
+  }
+  return o;
+}
+const chip = (v, cls = '') => `<span class="chip ${cls}">${v}</span>`;
+function initBPE() { bpeRender(0); }
+function bpeRender(k) {
+  let words = BPE_W.map(([w, f]) => [[...w], f]);
+  BPE_M.slice(0, k).forEach(([a, b]) => { words = words.map(([t, f]) => [bpeMerge(t, a, b), f]); });
+  const nx = BPE_M[k], last = k ? BPE_M[k - 1][0] + BPE_M[k - 1][1] : null;
+  document.getElementById('bpe-words').innerHTML = words.map(([t, f]) => {
+    const hl = new Set();
+    if (nx) for (let i = 0; i < t.length - 1; i++) if (t[i] === nx[0] && t[i + 1] === nx[1]) { hl.add(i); hl.add(i + 1); i++; }
+    return `<div class="bpe-row"><div class="bpe-chips">${t.map((v, i) => chip(v, hl.has(i) ? 'hl' : v === last ? 'new' : '')).join('')}</div><span class="bpe-f">×${f}</span></div>`;
+  }).join('');
+  document.getElementById('bpe-nk').textContent = nx ? 'PRÓXIMA FUSIÓN' : 'RESULTADO';
+  document.getElementById('bpe-next').innerHTML = nx
+    ? `<div class="bpe-big">${chip(nx[0], 'hl')}<span>+</span>${chip(nx[1], 'hl')}<span>→</span>${chip(nx[0] + nx[1], 'new')}</div>
+       <p class="bpe-p">Aparece <strong>${nx[2]} veces</strong>: es el par más frecuente.</p>
+       <p class="bpe-p bpe-dim">Siguen: ${nx[3]}</p>`
+    : `<p class="bpe-p">Paramos tras <strong>4 fusiones</strong>: la cantidad de fusiones es el único hiperparámetro.</p>
+       <p class="bpe-p">"gatos" quedó como ${chip('gato')} ${chip('s')} y "gata" como ${chip('g')} ${chip('at')} ${chip('a')}: las palabras nuevas se arman con piezas conocidas.</p>`;
+  const vocab = BPE_BASE.concat(BPE_M.slice(0, k).map(([a, b]) => a + b));
+  document.getElementById('bpe-vk').textContent = `VOCABULARIO · ${vocab.length} TOKENS`;
+  document.getElementById('bpe-vocab').innerHTML = vocab.map(v => chip(v, v === last ? 'new' : '')).join('');
+  document.getElementById('bpe-step').textContent = k ? `Fusión ${k} de ${BPE_M.length}` : 'Inicio: solo caracteres';
+  document.getElementById('bpe-hint').style.visibility = nx ? 'visible' : 'hidden';
+}
+
+// ─── SAMPLING: misma distribución que la slide de entrenamiento ──
+const SAMP = [['mat', .58], ['floor', .10], ['chair', .07], ['rug', .05], ['ground', .04], ['table', .04], ['wall', .03], ['it', .03], ['there', .02], ['him', .01]]
+  .map(([t, p]) => ({t, z: Math.log(p)}));  // logits: con T = 1 se recupera la distribución original
+const sampState = {T: 1, k: 10, p: 1};
+function sampDist() {
+  const {T, k, p} = sampState;
+  const e = SAMP.map(s => Math.exp(s.z / T)), Z = e.reduce((a, b) => a + b, 0);
+  const pt = e.map(v => v / Z);  // ya ordenado de mayor a menor
+  let acc = 0;
+  const keep = pt.map((v, i) => {
+    const ok = i < k && acc < p;  // top-p: el menor conjunto cuya suma llega a p
+    acc += v;
+    return ok;
+  });
+  const Zk = pt.reduce((a, v, i) => a + (keep[i] ? v : 0), 0);
+  return pt.map((v, i) => ({t: SAMP[i].t, pt: v, keep: keep[i], pf: keep[i] ? v / Zk : 0}));
+}
+function sampRender() {
+  const d = sampDist();
+  document.getElementById('samp-bars').innerHTML = d.map(x => `
+    <div class="sb-col${x.keep ? '' : ' out'}">
+      <div class="sb-val">${x.keep ? Math.round(x.pf * 100) + '%' : '✕'}</div>
+      <div class="sb-bar" style="height:${Math.max(2, (x.keep ? x.pf : x.pt) * 190)}px"></div>
+      <div class="sb-lbl">${x.t}</div>
+    </div>`).join('');
+  document.getElementById('samp-T').textContent = sampState.T.toFixed(1);
+  document.getElementById('samp-k').textContent = sampState.k;
+  document.getElementById('samp-p').textContent = sampState.p.toFixed(2);
+  document.getElementById('samp-n').textContent = d.filter(x => x.keep).length;
+}
+function sampDraw(times) {
+  const d = sampDist(), out = document.getElementById('samp-out');
+  for (let n = 0; n < times; n++) {
+    let r = Math.random(), pick = d.find(x => x.keep);
+    for (const x of d) { if (!x.keep) continue; r -= x.pf; if (r <= 0) { pick = x; break; } }
+    out.insertAdjacentHTML('afterbegin', chip(pick.t, pick.t === 'mat' ? '' : 'new'));
+  }
+  while (out.children.length > 24) out.lastChild.remove();
+}
+function initSampling() {
+  if (document.getElementById('samp-bars').children.length) return;
+  [['T', 'samp-in-T', parseFloat], ['k', 'samp-in-k', parseInt], ['p', 'samp-in-p', parseFloat]].forEach(([key, id, parse]) => {
+    const el = document.getElementById(id);
+    el.addEventListener('input', () => { sampState[key] = parse(el.value); sampRender(); });
+  });
+  sampRender();
 }
 
 // builds a perfectly-aligned ASCII box — just change the text string
@@ -1088,151 +1318,6 @@ function asciiBox(text, pad = 2) {
 function initDemoBanner() {
   const el = document.getElementById('demo-banner');
   if (el) el.textContent = asciiBox('LLaMA 3.1 8B — BASE MODEL DEMO');
-}
-
-// ─── BPE ANIMATION ────────────────────────────────────────────
-const BPE_STEPS = [
-  {
-    tokens:[{v:'n',w:0},{v:'e',w:0},{v:'w',w:0},{v:'e',w:0},{v:'r',w:0},null,
-            {v:'n',w:1},{v:'e',w:1},{v:'w',w:1},{v:'b',w:1},{v:'o',w:1},{v:'r',w:1},{v:'n',w:1},null,
-            {v:'n',w:2},{v:'e',w:2},{v:'w',w:2},{v:'e',w:2},{v:'s',w:2},{v:'t',w:2}],
-    pair:['n','e'], label:'"n" + "e" → "ne"', count:3, vocab:256, merges:0, tokenCount:18,
-    newToken:null, newId:null
-  },
-  {
-    tokens:[{v:'ne',w:0,d:1},{v:'w',w:0},{v:'e',w:0},{v:'r',w:0},null,
-            {v:'ne',w:1,d:1},{v:'w',w:1},{v:'b',w:1},{v:'o',w:1},{v:'r',w:1},{v:'n',w:1},null,
-            {v:'ne',w:2,d:1},{v:'w',w:2},{v:'e',w:2},{v:'s',w:2},{v:'t',w:2}],
-    pair:['ne','w'], label:'"ne" + "w" → "new"', count:3, vocab:257, merges:1, tokenCount:15,
-    newToken:'ne', newId:256
-  },
-  {
-    tokens:[{v:'new',w:0,d:2},{v:'e',w:0},{v:'r',w:0},null,
-            {v:'new',w:1,d:2},{v:'b',w:1},{v:'o',w:1},{v:'r',w:1},{v:'n',w:1},null,
-            {v:'new',w:2,d:2},{v:'e',w:2},{v:'s',w:2},{v:'t',w:2}],
-    pair:['new','e'], label:'"new" + "e" → "newe"', count:2, vocab:258, merges:2, tokenCount:12,
-    newToken:'new', newId:257
-  },
-  {
-    tokens:[{v:'newe',w:0,d:3},{v:'r',w:0},null,
-            {v:'new',w:1,d:2},{v:'b',w:1},{v:'o',w:1},{v:'r',w:1},{v:'n',w:1},null,
-            {v:'newe',w:2,d:3},{v:'s',w:2},{v:'t',w:2}],
-    pair:null, label:null, count:0, vocab:259, merges:3, tokenCount:10,
-    newToken:'newe', newId:258
-  }
-];
-const BPE_WCOLS = ['#00e5c3','#ffb730','#4d9fff'];
-let bpeActive = false, bpeCur = 0;
-
-function initBPE() {
-  bpeActive = false;
-  setTimeout(() => { bpeActive = true; bpeCur = 0; bpeRender(0); bpeSchedule(); }, 60);
-}
-function bpeRestart() {
-  bpeActive = false;
-  setTimeout(() => { bpeActive = true; bpeCur = 0; bpeRender(0); bpeSchedule(); }, 60);
-}
-
-function bpeRender(step) {
-  const d = BPE_STEPS[step];
-  const seq = document.getElementById('bpe-seq');
-  const info = document.getElementById('bpe-info');
-  const hist = document.getElementById('bpe-hist');
-  if (!seq) return;
-
-  // token sequence
-  seq.innerHTML = '';
-  d.tokens.forEach(t => {
-    if (t === null) {
-      const sep = document.createElement('span');
-      sep.textContent = '/';
-      sep.style.cssText = 'font-family:"Cutive Mono",monospace;font-size:1.3rem;color:var(--muted);padding:0 4px;align-self:center;opacity:.4';
-      seq.appendChild(sep);
-      return;
-    }
-    const el = document.createElement('span');
-    el.dataset.v = t.v;
-    el.textContent = t.v;
-    const col = BPE_WCOLS[t.w];
-    const dp = t.d || 0;
-    const bgA = ['15','22','30','40'][dp];
-    const brA = ['44','66','88','aa'][dp];
-    el.style.cssText = `display:inline-flex;align-items:center;justify-content:center;padding:${7+dp*2}px ${10+dp*3}px;border-radius:${5+dp*2}px;font-family:'Cutive Mono',monospace;font-size:${.88+dp*.04}rem;font-weight:${dp>0?600:400};background:${col}${bgA};border:${dp>0?2:1}px solid ${col}${brA};color:${col};transition:all .3s;animation:fadeUp .3s ease both`;
-    seq.appendChild(el);
-  });
-
-  // stats
-  const el = (id) => document.getElementById(id);
-  if (el('bpe-vocab')) el('bpe-vocab').textContent = d.vocab;
-  if (el('bpe-merges')) el('bpe-merges').textContent = d.merges;
-  if (el('bpe-tcount')) el('bpe-tcount').textContent = d.tokenCount;
-  if (el('bpe-slabel')) el('bpe-slabel').textContent = `paso ${step} / 3`;
-
-  // merge info bar
-  if (info) {
-    if (d.pair) {
-      info.innerHTML = `<span class="mono" style="font-size:.75rem;color:var(--muted)">próximo merge →</span><span class="mono" style="font-size:1rem;color:var(--amber);margin:0 6px">${d.label}</span><span style="font-size:.9rem;color:var(--dim)">(aparece <strong style="color:var(--text)">${d.count}×</strong> en el corpus)</span>`;
-    } else {
-      info.innerHTML = `<span style="font-size:.97rem;color:var(--teal)">✓ Vocab: <strong>256 bytes → 259 tokens</strong> — los tokens originales se conservan, solo se añaden nuevos.</span>`;
-    }
-  }
-
-  // merge history — shows what was added to the vocab at each step
-  if (hist) {
-    hist.innerHTML = '';
-    if (step === 0) {
-      hist.innerHTML = '<span style="font-size:.88rem;color:var(--muted);font-style:italic">esperando primer merge...</span>';
-    } else {
-      BPE_STEPS.slice(0, step).forEach((sd, i) => {
-        const minted = BPE_STEPS[i + 1];
-        const row = document.createElement('div');
-        row.style.cssText = `display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--border);animation:fadeUp .3s ease ${i*.06}s both`;
-        row.innerHTML = `
-          <span class="mono" style="color:var(--muted);font-size:.72rem;min-width:18px">${i+1}.</span>
-          <span class="mono" style="color:var(--amber);font-size:.9rem">${sd.label}</span>
-          <span style="margin-left:auto;display:flex;align-items:center;gap:6px">
-            <span class="mono" style="font-size:.78rem;background:rgba(0,229,195,.12);border:1px solid rgba(0,229,195,.4);color:var(--teal);padding:1px 7px;border-radius:4px">+&nbsp;"${minted.newToken}"</span>
-            <span class="mono" style="font-size:.68rem;color:var(--muted)">ID&nbsp;${minted.newId}</span>
-          </span>`;
-        hist.appendChild(row);
-      });
-    }
-  }
-}
-
-function bpeHighlight(step) {
-  if (!bpeActive) return;
-  const d = BPE_STEPS[step];
-  if (!d.pair) return;
-  const [a, b] = d.pair;
-  const spans = Array.from(document.querySelectorAll('#bpe-seq span[data-v]'));
-  const col = '#ffdb70';
-  for (let i = 0; i < spans.length - 1; i++) {
-    if (spans[i].dataset.v === a && spans[i+1].dataset.v === b) {
-      [spans[i], spans[i+1]].forEach(s => {
-        s.style.boxShadow = `0 0 0 2px ${col}, 0 0 18px ${col}99`;
-        s.style.borderColor = col;
-        s.style.color = col;
-        s.style.transform = 'translateY(-4px) scale(1.05)';
-      });
-    }
-  }
-}
-
-function bpeSchedule() {
-  if (!bpeActive) return;
-  const d = BPE_STEPS[bpeCur];
-  if (!d.pair) return;
-  setTimeout(() => {
-    if (!bpeActive) return;
-    bpeHighlight(bpeCur);
-    setTimeout(() => {
-      if (!bpeActive) return;
-      bpeCur++;
-      bpeRender(bpeCur);
-      bpeSchedule();
-    }, 1800);
-  }, 1400);
 }
 
 // slide 4 — token visualisation
@@ -1376,6 +1461,7 @@ function initInference() {
 
 // ─── keyboard nav ──────────────────────────────────────────────
 document.addEventListener('keydown', e => {
+  if (e.target.matches('input, button')) return;  // las flechas mueven los sliders, no las slides
   if (e.key === 'ArrowRight' || e.key === ' ') go(1);
   if (e.key === 'ArrowLeft') go(-1);
 });
